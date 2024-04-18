@@ -1,0 +1,169 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+thead {
+  border: 5px solid black;
+  display: inline-flex;
+  flex-direction: column-reverse;
+}
+
+table tr {
+  display: flex;
+}
+
+table tr:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+table tr th {
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert {
+  background: red;
+}
+
+.destination {
+  background: wheat;
+}
+
+.pulser {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rebeccapurple;
+  position: relative;
+}
+
+.pulser::after {
+  animation: pulse 1000ms cubic-bezier(0.9, 0.7, 0.5, 0.9) infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 0.4;
+  }
+}
+
+.pulser::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: blueviolet;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.info-tips {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.info-tips span {
+  width: 20px;
+  height: 20px;
+}
+
+.info-tips p {
+  margin-left: 2px;
+}
+
+#background {
+  display: inline-flex;
+}
+
+button {
+  cursor: pointer;
+}
+
+.game-dice {
+  padding: 10px;
+  margin: 10px;
+  height: 100px;
+  width: 100px;
+  background: rgb(188, 243, 105);
+  border-radius: 10px;
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.board-snake {
+  background: wheat;
+  width: 15px;
+  height: 15px;
+  font-size: 10px;
+  border: 1px solid;
+  margin-bottom: 15px;
+}
+
+.player {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.player h4 {
+  padding: 15px;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  #background {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .game-board {
+    flex-direction: row-reverse;
+  }
+
+  .game-confg {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .game-values {
+    font-size: 12px;
+  }
+
+  table tr th, .pulser {
+    width: 6vw;
+    height: 6vw;
+    font-size: 12px;
+  }
+
+  .board-snake {
+    width: 12px;
+    height: 12px;
+    margin-bottom: 10px;
+  }
+}
