@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Dice from "./Dice";
 
 export default function Board() {
@@ -17,6 +17,22 @@ export default function Board() {
         const max = Math.floor(to);
         return Math.floor(Math.random() * (max - min + 1) + min);
     };
+
+    const snakeBitePoint = useMemo(() => {
+        const snakeHouse = new Map();
+        while (snakeHouse.size < 11) {
+            const home = getRandomNumber(12, 99);
+            const dest = getRandomNumber(2, home - 1);
+            snakeHouse.set(home, dest);
+        }
+        return snakeHouse;
+    }, []);
+
+    useEffect(() => {
+        setTimeout(() => {
+            if (snakeBitePoint.get(active)) setActive(snakeBitePoint.get(active));
+        }, 300);
+    }, [active, snakeBitePoint]);
 
     return (
         <div id="background">
@@ -49,14 +65,23 @@ export default function Board() {
                     <thead>
                         {memoizedValue.map((i, ind) => (
                             <tr key={`tr-${ind}`}>
-                                {i.map((ij) => (
-                                    <th
-                                        key={`th-${ij}`}
-                                        className={`${ij === Number(active) ? "pulser" : ""}`}
-                                    >
-                                        {ij}
-                                    </th>
-                                ))}
+                                {i.map((ij) => {
+                                    const bEntry = snakeBitePoint.get(ij);
+                                    return (
+                                        <th
+                                            key={`th-${ij}`}
+                                            className={`${bEntry ? "alert" : "normal"} ${ij === Number(active) ? "pulser" : ""}`}
+                                        >
+                                            {ij}
+
+                                            {bEntry && (
+                                                <sub className="board-snake">
+                                                    {bEntry}
+                                                </sub>
+                                            )}
+                                        </th>
+                                    );
+                                })}
                             </tr>
                         ))}
                     </thead>
