@@ -12,10 +12,21 @@ export default function Board() {
         return newArr;
     }, []);
 
-    const getRandomNumber = (from, to) => {
+    const getRandomNumber = (from, to, isCrookedDice = false) => {
         const min = Math.ceil(from);
         const max = Math.floor(to);
-        return Math.floor(Math.random() * (max - min + 1) + min);
+
+        if (isCrookedDice) {
+            let randomNum = Math.floor(Math.random() * (max - min + 1) + min);
+            if (randomNum % 2 !== 0) {
+                if (randomNum === max)
+                    randomNum -= 1;
+                else
+                    randomNum += 1;
+            }
+            return randomNum;
+        } else
+            return Math.floor(Math.random() * (max - min + 1) + min);
     };
 
     const snakeBitePoint = useMemo(() => {

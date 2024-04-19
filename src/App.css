@@ -134,6 +134,16 @@ button {
   margin: 0;
 }
 
+.toggle-crooked, .restart-game {
+  padding: 7px;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.restart-game {
+  margin: 10px 0;
+}
+
 @media screen and (max-width: 768px) {
   #background {
     display: flex;
@@ -155,7 +165,8 @@ button {
     font-size: 12px;
   }
 
-  table tr th, .pulser {
+  table tr th,
+  .pulser {
     width: 6vw;
     height: 6vw;
     font-size: 12px;
@@ -166,4 +177,10 @@ button {
     height: 12px;
     margin-bottom: 10px;
   }
+}
+
+.game-confg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
